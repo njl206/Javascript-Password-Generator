@@ -1,3 +1,6 @@
+var generateButton = document.querySelector("#generate");
+
+
 function generatePassword () {
     var characterLength = 0;
     while (characterLength < 8 || characterLength > 128 || isNaN(characterLength)) {
@@ -30,24 +33,26 @@ function generatePassword () {
 
 
     if (lowerCase === true) {
-        optionsArray.concat(lowerCharset)
+        optionsArray = optionsArray.concat(lowerCharset)
         passwordArray.push(randomGenerator(lowerCharset))
     }
 
-    if (upperCharset === true) {
-        optionsArray.concat(upperCharset)
+    if (upperCase === true) {
+        optionsArray = optionsArray.concat(upperCharset)
         passwordArray.push(randomGenerator(upperCharset))
     }
 
-    if (numberset === true) {
-        optionsArray.concat(numberset)
+    if (numbers === true) {
+        optionsArray = optionsArray.concat(numberset)
         passwordArray.push(randomGenerator(numberset))
     }
 
-    if (specialCharset === true) {
-        optionsArray.concat(specialCharset)
+    if (specialCharacters === true) {
+        optionsArray = optionsArray.concat(specialCharset)
         passwordArray.push(randomGenerator(specialCharset))
     }
+    console.log(passwordArray.length)
+    console.log(optionsArray)
     for(var i = passwordArray.length +1; i <= characterLength; i++) {
         passwordArray.push(randomGenerator(optionsArray))
     }
@@ -60,4 +65,12 @@ function randomGenerator(characterArray){
     return randomCharacter;
 }
 
-generatePassword()
+
+function writePassword(){
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password
+}
+
+generateButton.addEventListener("click", writePassword);
+
